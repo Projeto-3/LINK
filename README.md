@@ -1,4 +1,4 @@
-# LINK
+# LINK Community
 Olá, somos o grupo Link, estudantes do terceiro período de ciencias da computação
 da instituição de ensino superior CESAR Schoool.
 
