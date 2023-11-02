@@ -7,11 +7,11 @@ a *LINK Community!* ela tem por objetivo conectar pessoas e projetos sociais, ev
 
 -------------------------------------------------------------------------------------------------------
 # Colaboradores:
-Isabela Spinelli: bela975 (github)
-Maria Júlia Pessoa: mariajuliapessoa (github)
-Maria Luísa Arruda: MaluArr (github)
-Nicolas Miranda: NicolasSenna (github)
-Marina Frias: marinaffsc (github)
+Isabela Spinelli: bela975 (github) <br />
+Maria Júlia Pessoa: mariajuliapessoa (github) <br />
+Maria Luísa Arruda: MaluArr (github) <br />
+Nicolas Miranda: NicolasSenna (github) <br />
+Marina Frias: marinaffsc (github) <br />
 Ester Carvalho: ester-acm (github)
 
 -------------------------------------------------------------------------------------------------------
