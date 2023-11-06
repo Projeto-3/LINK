@@ -60,13 +60,20 @@ def cadastro(request):
 
 
 
-
+# Create your views here.
+class SignUpView(SuccessMessageMixin, CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
+    success_message = 'Account was created successfully! Now Log In using your details.'
 
 
 #CRIAR VALIDAÇÕES:
-#CPF, CNPJ
-# email
-# nome, sem numeros 
+#CPF, CNPJ OK
+# email OK
+# nome de usuário, sem caracteres especiais OK
+# DATA NASCIMENTO
+# CIDADE
 
 
 

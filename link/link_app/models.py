@@ -1,6 +1,10 @@
 from django.db import models
 from enum import Enum
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.contrib.auth import get_user_model
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class Usuario(models.Model):
     nomeUsuario = models.CharField(max_length=50, null=False, blank=False) 
@@ -66,3 +70,23 @@ class Relatorio(models.Model):
 
     def __str__(self):
         return self.idProjetoRelatorio
+
+User = get_user_model
+
+class CustomUser(AbstractUser):
+    username_validator = UnicodeUsernameValidator()
+
+    username = models.CharField(
+        "Username",
+        max_length = 150,
+        unique = True,
+        help_text = ("Required. 150 characters or fewer. Letters, and digits only."),
+        # customize the above string as you want
+        validators = [username_validator],
+        error_messages = {
+            'unique': ("A user with that username already exists."),
+        },
+    )
+    email = models.EmailField(max_length=254, blank=False, unique = True)
+    first_name = models.CharField(max_length = 30, blank = False)
+    last_name = models.CharField(max_length = 50, blank = Fals
