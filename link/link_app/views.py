@@ -46,6 +46,7 @@ def cadastro(request):
             Usuario.nomeUsuario = form.save('nome de usuario')
             Usuario.senha = form.save('senha')
             Usuario.CPF = form.save('CPF')
+            Usuario.CNPJ = form.save('CNPJ')
             Usuario.nascimentoData = form.save('data do nascimento')
             Usuario.cidade = form.save('cidade')
             Usuario.tipoUsuario = form.save('tipo do usuario')
@@ -63,8 +64,9 @@ def cadastro(request):
 
 
 #CRIAR VALIDAÇÕES:
-#CPF
-#
+#CPF, CNPJ
+# email
+# nome, sem numeros 
 
 
 

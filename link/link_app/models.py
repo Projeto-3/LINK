@@ -7,6 +7,7 @@ class Usuario(models.Model):
     email = models.EmailField()
     senha = models.CharField(max_Lenght = 30, null = False, blank = False)
     CPF = models.CharField(max_length=11, null=False, primary_key=True)
+    CNPJ = models.CharField(max_length=11, null=False, primary_key=True)
     cidade = models.CharField(max_length=50, null=False)
     nascimentoData = models.DateField(max_length=10, null=False, blank=False)
     #como puxar nivel de acesso?
