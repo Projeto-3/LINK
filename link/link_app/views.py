@@ -1,46 +1,71 @@
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Permission
 from link_app.models import Usuario, Perfil, Projeto, Demanda, Doacao, Relatorio
+from django.contrib.auth.backends import BaseBackend
+from django.utils import timezone
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from .models import Usuario, TipoDoUsuario, Projeto, Doacao, Demanda, Relatorio
+
 
 def home(request):
     if request.user.is_authenticated:
-        return redirect('') #Ve para onde redirecionar (MarketPlace)
+        return redirect('homeLogado')
         
     context = {'home': True}
     return render(request, 'app/index.html', context)
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('') #home
+        return redirect('homeLogado')
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
-            senha = form.cleaned_data.get('senha')
-            user = authenticate(email=email, senha=senha)
-            if user is not None: 
+            Usuario.nomeUsuario = form.cleaned_data.get('nomeUsuario')
+            Usuario.senha = form.cleaned_data.get('senha')
+            user = authenticate(username=username, password=password)
+            if user is not None:
                 login(request, user)
-                return redirect('') #home
+            else:
+                    cadastro.objects.create(user=Usuario)
+                    form = AuthenticationForm()
+            
     else:
         form = AuthenticationForm()
     return render(request, 'app/login.html', {'form': form})
 
 
-def cadastro(request): 
-    if request.mathot == 'GET':
-        return render(request, ) #template
-    else: 
-        email == request.POST.get('email')
-        senha == request.POST.get('senha')
-        nomeUsuario == request.POST.get('nomeUsuario')
-        user = Usuario.object.filter(email = email).first()
-        #Verificar os outros atributos, especial o CPF válido ou não 
-    # cpf 
-    # cidade 
-    # nascimentoData 
-    # tipoUsuario
+def cadastro(request):
+    if request.user.is_authenticated:
+        return redirect('homeLogado')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            #salvar os atributos e fazer  suas respectivas validacoes
+            Usuario.nomeUsuario = form.save('nome de usuario')
+            Usuario.senha = form.save('senha')
+            Usuario.CPF = form.save('CPF')
+            Usuario.nascimentoData = form.save('data do nascimento')
+            Usuario.cidade = form.save('cidade')
+            Usuario.tipoUsuario = form.save('tipo do usuario')
+
+            cadastro.objects.create(user=Usuario) 
+            login(request, Usuario)
+            return redirect('homeLogado')
+    else:
+        form = UserCreationForm()
+    return render(request, 'app/register.html', {'form': form})
+
+
+
+
+
+
+#CRIAR VALIDAÇÕES:
+#CPF
+#
+
 
 
 #LÓGICA:
@@ -53,5 +78,3 @@ def cadastro(request):
 # - FiltroLoc
 # - AtribResp
 # - DivulgInfo
-
-def Visualizacao(request):

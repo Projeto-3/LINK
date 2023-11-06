@@ -6,9 +6,10 @@ class Usuario(models.Model):
     nomeUsuario = models.CharField(max_length=50, null=False, blank=False) 
     email = models.EmailField()
     senha = models.CharField(max_Lenght = 30, null = False, blank = False)
-    cpf = models.CharField(max_length=11, null=False, primary_key=True)
+    CPF = models.CharField(max_length=11, null=False, primary_key=True)
     cidade = models.CharField(max_length=50, null=False)
     nascimentoData = models.DateField(max_length=10, null=False, blank=False)
+    #como puxar nivel de acesso?
     tipoUsuario = models.IntegerField(max_length=1, null = False, blank=False)
 
     def __str__(self):
