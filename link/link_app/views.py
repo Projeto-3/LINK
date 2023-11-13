@@ -7,8 +7,20 @@ from django.contrib.auth.backends import BaseBackend
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import Usuario, TipoDoUsuario, Projeto, Doacao, Demanda, Relatorio
+from rolepermissions.roles import assign_role
+#Após criar um usuário passar assign_role( variavel, 'classe_que_participa')
+from rolepermissions.decorators import has_role_decorator
+#colocar o @classe_que_participa acima de cada função qual o usuário possa ter a permissão(verificação de usuário, passando o grupo) ou seja, somente uma classe poderá acesar a função/página.
+#lembrar que as funções precisam do nome que estão nas permissions
 
+#colocar @has_permissions_decorator('nome_da_função/permissão') ,ou seja, verifica a permissão de acesso podendo deixar usuários de classes iferentes acessar a função/página
+from rolepermissions.roles import revoke_permissions
+#para revogar uma permissão de acesso: revoke_permissions(usuario_revogado, 'permissão_a_ser_revogada')
+from rolepermissions.roles import grant_permissions
+#para conseder uma permissão: grant_permissions(usuario_adicioado, 'permissao_a_ser_adicionada')
+#serve para não repetir mesmas funções em classes diferentes em permissions (reuso de código)
 
+#Consegue fazer as verificações dentro do HTML (a partir do minuto 22)
 def home(request):
     if request.user.is_authenticated:
         return redirect('homeLogado')
